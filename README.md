@@ -14,30 +14,47 @@ Read [`problem_statement.md`](./problem_statement.md) for the complete challenge
 
 ## Quick Start
 
-Clone the repository and move into the project directory:
+### 1. Installation
+
+Install required dependencies:
 
 ```bash
-git clone https://github.com/interviewstreet/hackerrank-orchestrate-october26.git
-cd hackerrank-orchestrate-october26
+pip install -r code/requirements.txt
 ```
 
-Start your AI coding tool from the **repository root** so it automatically reads [`AGENTS.md`](./AGENTS.md) and logs your session turns to `log.txt` in the root directory.
+### 2. Configuration (.env)
 
-Build your solution in `code/main.py`, or use another language and document its setup and run command clearly in your README.
-
-Your solution must:
-
-- Read the input files from `dataset/`
-- Generate one prediction row for every request in `dataset/deletion_requests.csv`
-- Write the final predictions to `output.csv` in the repository root
-
-Run the starter Python entry point with:
+Create a `.env` file in the repository root (see `.env.example`):
 
 ```bash
-python3 code/main.py
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_BASE_URL=https://api.groq.com/openai/v1
+GROQ_MODEL=openai/gpt-oss-120b
+EMBEDDING_MODEL=all-MiniLM-L6-v2
 ```
 
-The blank template at `dataset/output.csv` is provided as a reference. Your final generated file for submission must be the root-level `output.csv`.
+### 3. Execution
+
+Run the complete pipeline across all 518 evaluation requests:
+
+```bash
+python code/main.py
+```
+*(Or simply `python main.py` from repository root)*
+
+To test on the 32 sample requests only:
+
+```bash
+python code/main.py --sample-only
+```
+
+To run evaluation benchmarks and generate accuracy reports:
+
+```bash
+python code/evaluation/main.py
+```
+
+Predictions are saved directly to `output.csv` at the repository root. Usage and evaluation reports are written to `code/evaluation/` and `evaluation/`.
 
 
 ## Dataset
